@@ -12,7 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v3
+      - run: nix develop --command bash -c "mkdir -p ~/.android && keytool -genkey -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname 'CN=Android Debug,O=Android,C=US'"
       - run: nix develop --command bash -c "bun install --frozen-lockfile && bun android:build"
+      - run: cp android/app/build/outputs/apk/release/app-release-signed.apk guestbook.apk
 
       - uses: actions/upload-artifact@v4
         with:
