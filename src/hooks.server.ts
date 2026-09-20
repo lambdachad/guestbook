@@ -2,7 +2,8 @@ import type { Handle } from "@sveltejs/kit/hooks"
 
 const headers = {
     "access-control-allow-origin": "*",
-    "access-control-allow-methods": "GET, POST, OPTIONS",
+    "access-control-allow-methods": "*",
+    "access-control-allow-headers": "content-type",
 }
 
 export const handle: Handle = async ({ event, resolve }) => {

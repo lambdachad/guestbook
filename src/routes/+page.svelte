@@ -32,7 +32,7 @@
         <tbody>
             {#each guests as guest (guest.id)}
                 <tr>
-                    <td>{guest.name}</td>
+                    <td><a href="/{guest.id}">{guest.name}</a></td>
                     <td>{guest.email}</td>
                 </tr>
             {/each}
