@@ -1,22 +1,24 @@
 name: Build APK
 
 on:
-  push:
-  workflow_dispatch:
+    push:
+    workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    env:
-      API_URL: https://guestbook.fly.dev
-    steps:
-      - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v3
-      - run: nix develop --command bash -c "mkdir -p ~/.android && keytool -genkey -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname 'CN=Android Debug,O=Android,C=US'"
-      - run: nix develop --command bash -c "bun install --frozen-lockfile && bun android:build"
-      - run: cp android/app/build/outputs/apk/release/app-release-signed.apk guestbook.apk
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: guestbook
-          path: guestbook.apk
+    build:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        env:
+            API_URL: https://guestbook.fly.dev
+        steps:
+            - uses: actions/checkout@v4
+            - uses: DeterminateSystems/nix-installer-action@v3
+            - run: mkdir -p ~/.android
+            - run: nix develop --command keytool -genkey -keyalg RSA -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -dname "CN=Android Debug"
+            - run: nix develop --command bun install --frozen-lockfile
+            - run: nix develop --command bun android:build
+            - run: cp android/app/build/outputs/apk/release/app-release-signed.apk guestbook.apk
+            - run: gh release create "${GITHUB_SHA::7}" guestbook.apk --title "${GITHUB_SHA::7}" --generate-notes
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -13,7 +13,7 @@ On the phone enable USB debugging, plug in, accept the RSA prompt, then
 run `bun dev` in one terminal and `bun android:dev` in another: the phone loads the dev server
 over USB and refreshes on every edit. To build a release APK, run `bun android:build`.
 
-# Release 
+# Release
 
 For client side (Android APK), run following to install in release mode:
 
