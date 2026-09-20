@@ -1,17 +1,6 @@
 <script lang="ts">
-    import { LocalNotifications } from "@capacitor/local-notifications"
     import { createGuest, listGuests } from "../lib/api/guests.js"
-    import type { Guest, NewGuest } from "../lib/database/schema.js"
-
-    // Notifications
-    let notifyWarning = $state<string>()
-    try {
-        const current = await LocalNotifications.checkPermissions()
-        const display = current.display === "granted" ? "granted" : (await LocalNotifications.requestPermissions()).display
-        if (display !== "granted") notifyWarning = `Notifications: ${display}`
-    } catch (error) {
-        notifyWarning = `Notifications unavailable: ${error}`
-    }
+    import type { NewGuest } from "../lib/database/schema.js"
 
     // Guest
     let guests = $state(await listGuests())
@@ -22,9 +11,6 @@
         const guest = await createGuest({ name: newGuest.name, email: newGuest.email })
         newGuest = { name: "", email: "" }
         guests.push(guest)
-        await LocalNotifications.schedule({
-            notifications: [{ title: "New guest", body: `${guest.name} joined the guestbook`, id: Date.now() % 2147483647 }],
-        })
     }
 </script>
 
@@ -52,8 +38,4 @@
             {/each}
         </tbody>
     </table>
-{/if}
-
-{#if notifyWarning}
-    <p role="alert">{notifyWarning}</p>
 {/if}
