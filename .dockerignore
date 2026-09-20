@@ -1,0 +1,13 @@
+node_modules
+build
+.svelte-kit
+.git
+android
+.direnv
+.envrc
+*.db
+*.db-journal
+.env
+.env.*
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
