@@ -32,6 +32,13 @@
         buildInputs = [
           android-sdk
           pkgs.jdk21
+          (pkgs.bun.overrideAttrs {
+            version = "1.4.0";
+            src = pkgs.fetchurl {
+              url = "https://github.com/oven-sh/bun/releases/download/bun-v1.4.0/bun-linux-x64-baseline.zip";
+              hash = "sha256-GE+0WV8NQBohfPfHjBvEMLqDMU2reouUgFurv3+nCX8=";
+            };
+          })
         ];
 
         shellHook = ''

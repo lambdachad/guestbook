@@ -1,0 +1,21 @@
+name: Build APK
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      API_URL: https://guestbook.fly.dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v3
+      - run: nix develop --command bun install --frozen-lockfile && bun android:build
+      - run: cp android/app/build/outputs/apk/release/app-release-signed.apk guestbook.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: guestbook
+          path: guestbook.apk
