@@ -36,6 +36,7 @@
 
         shellHook = ''
           export JAVA_HOME="${pkgs.jdk21}/lib/openjdk"
+          export PATH="$ANDROID_HOME/build-tools/35.0.0:$PATH"
         '';
       };
     };

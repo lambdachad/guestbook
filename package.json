@@ -4,13 +4,13 @@
     "type": "module",
     "scripts": {
         "dev": "bun --bun vite dev",
-        "build": "bun --bun vite build",
-        "preview": "vite preview",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "format": "prettier --write .",
         "db:generate": "drizzle-kit generate",
+        "build": "TARGET=server bun --bun vite build",
+        "preview": "TARGET=server bun --bun vite preview",
         "android:dev": "TARGET=client cap run android -l --host localhost --port 5173 --forwardPorts 5173:5173",
-        "android:install": "TARGET=client bun --bun vite build && cap run android"
+        "android:build": "TARGET=client bun --bun vite build && cap sync android && cap build android"
     },
     "dependencies": {
         "@capacitor/android": "^8.5.2",

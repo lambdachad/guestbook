@@ -12,7 +12,7 @@ export default defineConfig({
                 },
             },
             csrf: {
-                trustedOrigins: ["*"]
+                trustedOrigins: ["*"],
             },
             adapter:
                 process.env.TARGET === "server"
@@ -32,5 +32,5 @@ export default defineConfig({
             ignored: ["**/android/**"],
         },
     },
-    clearScreen: false
+    clearScreen: false,
 })
