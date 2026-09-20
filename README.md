@@ -1,6 +1,6 @@
-# Mobile
+# Guestbook
 
-Native Android app. Same SvelteKit UI stack, built as a static SPA and wrapped by Capacitor 8.
+Native Android app written using SvelteKit, built as a static SPA and wrapped by Capacitor 8.
 
 ```bash
 bun install          # install dependencies

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">guestbook</string>
-    <string name="title_activity_main">guestbook</string>
+    <string name="app_name">Guestbook</string>
+    <string name="title_activity_main">Guestbook</string>
     <string name="package_name">com.example.guestbook</string>
     <string name="custom_url_scheme">com.example.guestbook</string>
 </resources>

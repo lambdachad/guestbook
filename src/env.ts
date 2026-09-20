@@ -13,7 +13,7 @@ function serverIP() {
 export const variables = defineEnvVars({
     DATABASE_URL: {
         description: "Path to the SQLite database file",
-        schema: (value) => value ?? "app.db",
+        schema: (value) => value ?? "guestbook.db",
     },
     API_URL: {
         public: true,
